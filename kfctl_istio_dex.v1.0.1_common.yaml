@@ -1,0 +1,108 @@
+apiVersion: kfdef.apps.kubeflow.org/v1
+kind: KfDef
+metadata:
+  clusterName: multi-tenancy-kube
+  creationTimestamp: null
+  name: common_deploy
+  namespace: kfnp1
+spec:
+  applications:
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: application/application-crds
+    name: application-crds
+  - kustomizeConfig:
+      parameters:
+      - name: namespace
+        value: istio-system
+      repoRef:
+        name: manifests
+        path: istio-1-3-1/istio-crds-1-3-1
+    name: istio-crds
+  - kustomizeConfig:
+      parameters:
+      - name: namespace
+        value: istio-system
+      repoRef:
+        name: manifests
+        path: istio-1-3-1/istio-install-1-3-1-noingress
+    name: istio-install
+  - kustomizeConfig:
+      parameters:
+      - name: namespace
+        value: istio-system
+      repoRef:
+        name: manifests
+        path: istio-1-3-1/cluster-local-gateway-1-3-1
+    name: cluster-local-gateway
+  - kustomizeConfig:
+      parameters:
+      - name: namespace
+        value: cert-manager
+      repoRef:
+        name: manifests
+        path: cert-manager/cert-manager-crds
+    name: cert-manager-crds
+  - kustomizeConfig:
+      parameters:
+      - name: namespace
+        value: kube-system
+      repoRef:
+        name: manifests
+        path: cert-manager/cert-manager-kube-system-resources
+    name: cert-manager-kube-system-resources
+  - kustomizeConfig:
+      overlays:
+      - self-signed
+      - application
+      parameters:
+      - name: namespace
+        value: cert-manager
+      repoRef:
+        name: manifests
+        path: cert-manager/cert-manager
+    name: cert-manager
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: kubeflow-roles
+    name: kubeflow-roles
+  - kustomizeConfig:
+      overlays:
+      - application
+      parameters:
+      - name: namespace
+        value: knative-serving
+      repoRef:
+        name: manifests
+        path: knative/knative-serving-crds
+    name: knative-crds
+  - kustomizeConfig:
+      overlays:
+      - application
+      parameters:
+      - name: namespace
+        value: knative-serving
+      repoRef:
+        name: manifests
+        path: knative/knative-serving-install
+    name: knative-install
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: kfserving/kfserving-crds
+    name: kfserving-crds
+  - kustomizeConfig:
+      repoRef:
+        name: manifests
+        path: katib/katib-crds
+    name: katib-crds
+  repos:
+  - name: manifests
+    uri: https://github.com/wxpjimmy/manifests/archive/1.0.5.tar.gz
+  version: v1.0.1
+status:
+  reposCache:
+  - localPath: '".cache/manifests/manifests-1.0.5"'
+    name: manifests
