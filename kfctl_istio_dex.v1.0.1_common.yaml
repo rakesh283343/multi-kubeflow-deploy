@@ -1,10 +1,7 @@
 apiVersion: kfdef.apps.kubeflow.org/v1
 kind: KfDef
 metadata:
-  clusterName: multi-tenancy-kube
-  creationTimestamp: null
-  name: common_deploy
-  namespace: kfnp1
+  namespace: kubeflow
 spec:
   applications:
   - kustomizeConfig:
@@ -100,9 +97,5 @@ spec:
     name: katib-crds
   repos:
   - name: manifests
-    uri: https://github.com/wxpjimmy/manifests/archive/1.0.5.tar.gz
+    uri: https://github.com/wxpjimmy/manifests/archive/1.0.12.tar.gz
   version: v1.0.1
-status:
-  reposCache:
-  - localPath: '".cache/manifests/manifests-1.0.5"'
-    name: manifests
