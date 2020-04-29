@@ -120,14 +120,6 @@ spec:
     name: metadata
   - kustomizeConfig:
       overlays:
-      - istio
-      - application
-      repoRef:
-        name: manifests
-        path: jupyter/notebook-controller
-    name: notebook-controller
-  - kustomizeConfig:
-      overlays:
       - application
       repoRef:
         name: manifests
@@ -262,17 +254,11 @@ spec:
         path: pipeline/pipeline-visualization-service
     name: pipeline-visualization-service
   - kustomizeConfig:
-      overlays:
-      - application
-      - istio
-      parameters:
-      - name: userid-header
-        value: kubeflow-userid
       repoRef:
         name: manifests
-        path: profiles
-    name: profiles
+        path: kfam-route
+    name: kfam-route
   repos:
   - name: manifests
-    uri: https://github.com/wxpjimmy/manifests/archive/1.0.12.tar.gz
+    uri: https://github.com/wxpjimmy/manifests/archive/1.0.15.tar.gz
   version: v1.0.1

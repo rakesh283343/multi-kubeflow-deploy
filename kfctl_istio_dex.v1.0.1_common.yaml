@@ -95,7 +95,25 @@ spec:
         name: manifests
         path: katib/katib-crds
     name: katib-crds
+  - kustomizeConfig:
+      overlays:
+      - istio
+      - application
+      repoRef:
+        name: manifests
+        path: jupyter/notebook-controller
+    name: notebook-controller
+  - kustomizeConfig:
+      overlays:
+      - application
+      parameters:
+      - name: userid-header
+        value: kubeflow-userid
+      repoRef:
+        name: manifests
+        path: profiles
+    name: profiles
   repos:
   - name: manifests
-    uri: https://github.com/wxpjimmy/manifests/archive/1.0.12.tar.gz
+    uri: https://github.com/wxpjimmy/manifests/archive/1.0.15.tar.gz
   version: v1.0.1

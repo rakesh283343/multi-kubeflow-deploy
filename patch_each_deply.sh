@@ -18,12 +18,12 @@ EOF
 
 while [[ $# -gt 0 ]]; do
     case ${1} in
-	--namespace)
+	    --namespace)
             namespace="$2"
 	    shift
 	    ;;
         --user)
-            user-"$2"
+            user="$2"
 	    shift
 	    ;;
         --passwd)
