@@ -68,6 +68,9 @@ spec:
       overlays:
       - istio
       - application
+      parameters:
+      - name: artifactRepositoryEndpoint
+        value: minio-service.${NAMESPACE}:9000
       repoRef:
         name: manifests
         path: argo

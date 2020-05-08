@@ -99,6 +99,9 @@ spec:
       overlays:
       - istio
       - application
+      parameters:
+      - name: ISTIO_GATEWAY
+        value: kubeflow-gateway
       repoRef:
         name: manifests
         path: jupyter/notebook-controller
